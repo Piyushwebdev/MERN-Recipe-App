@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import Button from '@mui/material/Button';
 
 export const Navbar = () => {
   const [cookies, setCookies] = useCookies(["access_token"]);
@@ -14,12 +15,17 @@ export const Navbar = () => {
   return (
     <div className="navbar">
       <Link to="/">Home</Link>
-      <Link to="/create-recipe">Create Recipe</Link>
+      {/* <Link to="/about">About</Link>  */}
+      <Link to="/recipes">Recipes</Link> 
       <Link to="/saved-recipes">Saved Recipes</Link>
+      <Link to="/create-recipe">Add Recipe</Link>
       {!cookies.access_token ? (
         <Link to="/auth">Login/Register</Link>
       ) : (
-        <button onClick={logout}> Logout </button>
+        <Button variant="contained" sx={{ ":hover": {
+          backgroundColor: "#FFA500",
+          borderColor: "#FFA500",
+        },backgroundColor:"#FF830F"}} onClick={logout}> Logout </Button>
       )}
     </div>
   );
