@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import RecipeReviewCard from "../components/RecipeReviewCard";
 import { useGetUserID } from "../hooks/useGetUserID";
 import axios from "axios";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 export const Recipe = () => {
   const [recipes, setRecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
-
+  const [alertmsg,setAlertmsg]=useState("")
   const userID = useGetUserID();
 
   useEffect(() => {
@@ -37,10 +39,13 @@ export const Recipe = () => {
 
   return (
     <div>
+          {alertmsg?<Alert variant="filled" severity="success" onClose={() => {setAlertmsg("")}}>
+        {alertmsg}
+      </Alert>:""}
       <h1>Recipes</h1>
       <div className="recipesBox">
         {recipes.map((recipe) => (
-          <RecipeReviewCard recipe={recipe} userID={userID} savedRecipes={savedRecipes} setSavedRecipes={setSavedRecipes}/>
+          <RecipeReviewCard recipe={recipe} userID={userID} savedRecipes={savedRecipes} setSavedRecipes={setSavedRecipes} setAlertmsg={setAlertmsg} alertmsg={alertmsg}/>
         ))}
       </div>
     </div>

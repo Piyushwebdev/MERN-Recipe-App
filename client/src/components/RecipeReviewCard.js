@@ -28,7 +28,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard({ recipe,userID,savedRecipes,setSavedRecipes }) {
+export default function RecipeReviewCard({ recipe,userID,savedRecipes,setSavedRecipes,setAlertmsg,alertmsg }) {
   const [expanded, setExpanded] = useState({});
 
 const handleExpandClick = (id) => {
@@ -46,6 +46,7 @@ const handleExpandClick = (id) => {
         userID,
       });
       setSavedRecipes(response.data.savedRecipes);
+      setAlertmsg("Recipe successfully saved")
     } catch (err) {
       console.log(err);
     }

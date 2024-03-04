@@ -8,6 +8,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { TextareaAutosize } from "@mui/base";
 import { createSvgIcon } from "@mui/material/utils";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 const PlusIcon = createSvgIcon(
   // credit: plus icon from https://heroicons.com/
@@ -29,6 +31,7 @@ const PlusIcon = createSvgIcon(
 export const CreateRecipe = () => {
   const userID = useGetUserID();
   const [cookies, _] = useCookies(["access_token"]);
+  const [alertmsg,setAlertmsg]=useState("")
   const [recipe, setRecipe] = useState({
     name: "",
     descriptions: "",
@@ -68,8 +71,6 @@ export const CreateRecipe = () => {
           headers: { authorization: cookies.access_token },
         }
       );
-
-      alert("Recipe Created");
       navigate("/recipes");
     } catch (error) {
       console.error(error);
@@ -77,7 +78,7 @@ export const CreateRecipe = () => {
   };
 
   return (
-    <div className="addContainer">
+      <div className="addContainer">
       <div className="create-recipe">
         <Typography variant="h4">Add a new recipe</Typography>
         <form onSubmit={handleSubmit}>
