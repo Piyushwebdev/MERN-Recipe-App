@@ -18,11 +18,7 @@ body {
 }
 
 .auth {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f2f2f2;
+  margin-top: 10%;
 }
 
 .auth-container {
@@ -31,11 +27,12 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: white;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  margin: 20px;
-  width: 400px;
+  /* margin: 20px; */
+  width: 100%;
 }
 
 .form-group {

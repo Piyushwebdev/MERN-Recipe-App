@@ -31,7 +31,7 @@ const PlusIcon = createSvgIcon(
 export const CreateRecipe = () => {
   const userID = useGetUserID();
   const [cookies, _] = useCookies(["access_token"]);
-  const [alertmsg,setAlertmsg]=useState("")
+  const [alertmsg, setAlertmsg] = useState("");
   const [recipe, setRecipe] = useState({
     name: "",
     descriptions: "",
@@ -73,12 +73,21 @@ export const CreateRecipe = () => {
       );
       navigate("/recipes");
     } catch (error) {
-      console.error(error);
+      if (error.response && error.response.status === 401) {
+        setAlertmsg("Unauthorized access. Please login again.");
+      } else {
+        console.error(error);
+      }
     }
   };
 
   return (
       <div className="addContainer">
+           {alertmsg && (
+          <Stack sx={{ width: "100%" }} spacing={2}>
+            <Alert severity="error">{alertmsg}</Alert>
+          </Stack>
+        )}
       <div className="create-recipe">
         <Typography variant="h4">Add a new recipe</Typography>
         <form onSubmit={handleSubmit}>
@@ -181,6 +190,7 @@ export const CreateRecipe = () => {
             Add Recipe
           </Button>
         </form>
+     
       </div>
     </div>
   );
