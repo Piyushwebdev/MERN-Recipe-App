@@ -83,12 +83,13 @@ export const CreateRecipe = () => {
 
   return (
       <div className="addContainer">
-           {alertmsg && (
+        
+      <div className="create-recipe">
+      {alertmsg && (
           <Stack sx={{ width: "100%" }} spacing={2}>
             <Alert severity="error">{alertmsg}</Alert>
           </Stack>
         )}
-      <div className="create-recipe">
         <Typography variant="h4">Add a new recipe</Typography>
         <form onSubmit={handleSubmit}>
           <TextField

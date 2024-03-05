@@ -66,7 +66,7 @@ const handleExpandClick = (id) => {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: "#FF830F" }} aria-label="recipe">
-            R
+            🧑‍🍳
           </Avatar>
         }
         action={
