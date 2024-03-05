@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useGetUserID } from "../hooks/useGetUserID";
 import { useNavigate } from "react-router-dom";
@@ -80,6 +80,10 @@ export const CreateRecipe = () => {
       }
     }
   };
+  useEffect(() => {
+  console.log(recipe)
+  }, [recipe])
+  
 
   return (
       <div className="addContainer">

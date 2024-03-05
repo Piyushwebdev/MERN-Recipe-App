@@ -42,7 +42,7 @@ export const Recipe = () => {
           {alertmsg?<Alert variant="filled" severity="success" onClose={() => {setAlertmsg("")}}>
         {alertmsg}
       </Alert>:""}
-      <h1 style={{paddingLeft:"1rem"}}>Recipes</h1>
+      <h1 style={{marginLeft:"2rem"}}>Recipes</h1>
       <div className="recipesBox">
         {recipes.map((recipe) => (
           <RecipeReviewCard recipe={recipe} userID={userID} savedRecipes={savedRecipes} setSavedRecipes={setSavedRecipes} setAlertmsg={setAlertmsg} alertmsg={alertmsg}/>

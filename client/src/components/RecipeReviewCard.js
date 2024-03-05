@@ -14,8 +14,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import axios from "axios";
 import { useState } from "react";
+import { Alert } from "@mui/material";
+import { useEffect } from "react";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -30,6 +33,7 @@ const ExpandMore = styled((props) => {
 
 export default function RecipeReviewCard({ recipe,userID,savedRecipes,setSavedRecipes,setAlertmsg,alertmsg }) {
   const [expanded, setExpanded] = useState({});
+  const [alertOpen, setAlertOpen] = useState(false);
 
 const handleExpandClick = (id) => {
   setExpanded(expanded => ({
@@ -51,6 +55,49 @@ const handleExpandClick = (id) => {
       console.log(err);
     }
   };
+
+  const copyRecipe =async () => {
+    const recipeText = `
+      Recipe Name: ${recipe.name}
+      
+      Ingredients:
+      ${recipe.ingredients.join('\n')}
+      
+      Instructions:
+      ${recipe.instructions}
+      
+      Description:
+      ${recipe.description}
+    `;
+
+    // Create a temporary textarea element to hold the recipe text
+    const textarea = document.createElement('textarea');
+    textarea.value = recipeText;
+
+    // Append the textarea to the document
+    document.body.appendChild(textarea);
+
+    // Select the content of the textarea
+    textarea.select();
+
+    // Copy the selected content
+    document.execCommand('copy');
+
+    // Remove the temporary textarea
+    document.body.removeChild(textarea);
+
+    // Alert the user that the recipe has been copied
+    setAlertOpen(true)
+  };
+
+  const handleClose = () => {
+    setAlertOpen(false);
+  };
+
+useEffect(() => {
+console.log(alertOpen)
+}, [alertOpen])
+
 
   const isRecipeSaved = (id) => savedRecipes.includes(id);
   var cardStyle = {
@@ -98,9 +145,14 @@ const handleExpandClick = (id) => {
         >  
           <FavoriteIcon  sx={{ color:isRecipeSaved(recipe._id) ? "#FF830F" : "grey"}}/>
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+        <IconButton aria-label="share" onClick={() => copyRecipe()}>
+          <ContentCopyIcon />
         </IconButton>
+        {alertOpen?
+        <Alert open={alertOpen} onClose={handleClose} severity="success" sx={{ position: 'fixed', bottom: 16, right: 16 }}>
+        Recipe copied to clipboard!
+      </Alert>:""
+}
         <ExpandMore
           expand={expanded}
           onClick={(recipe) => handleExpandClick(recipe.id)}

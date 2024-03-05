@@ -21,6 +21,7 @@ router.post("/", verifyToken, async (req, res) => {
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     image: req.body.image,
+    descriptions:req.body.descriptions,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
     imageUrl: req.body.imageUrl,
@@ -35,6 +36,7 @@ router.post("/", verifyToken, async (req, res) => {
       createdRecipe: {
         name: result.name,
         image: result.image,
+        descriptions:result.descriptions,
         ingredients: result.ingredients,
         instructions: result.instructions,
         _id: result._id,
