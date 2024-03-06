@@ -3,6 +3,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import { userRouter } from "./routes/user.js";
 import { recipesRouter } from "./routes/recipes.js";
+import * as dotenv from 'dotenv';
+dotenv.config()
 
 const app = express();
 
@@ -13,7 +15,7 @@ app.use("/auth", userRouter);
 app.use("/recipes", recipesRouter);
 
 mongoose.connect(
-  "mongodb+srv://piyushjais07:Piyushjais07@cluster0.gxf9fax.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+  process.env.MONGO_URI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
